@@ -27,25 +27,26 @@ Partial Class frmDaSFmgEdit
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnOpen = New System.Windows.Forms.Button()
         Me.dgvTextEntries = New System.Windows.Forms.DataGridView()
-        CType(Me.dgvTextEntries, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SuspendLayout()
+        Me.Label1 = New System.Windows.Forms.Label()
+        CType(Me.dgvTextEntries,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.SuspendLayout
         '
         'txtFMGfile
         '
-        Me.txtFMGfile.AllowDrop = True
-        Me.txtFMGfile.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtFMGfile.AllowDrop = true
+        Me.txtFMGfile.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.txtFMGfile.Location = New System.Drawing.Point(64, 12)
         Me.txtFMGfile.Name = "txtFMGfile"
-        Me.txtFMGfile.ReadOnly = True
+        Me.txtFMGfile.ReadOnly = true
         Me.txtFMGfile.Size = New System.Drawing.Size(632, 20)
         Me.txtFMGfile.TabIndex = 31
         Me.txtFMGfile.Text = "Drag 'n Drop FMG file here"
-        Me.txtFMGfile.WordWrap = False
+        Me.txtFMGfile.WordWrap = false
         '
         'lblGAFile
         '
-        Me.lblGAFile.AutoSize = True
+        Me.lblGAFile.AutoSize = true
         Me.lblGAFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblGAFile.Location = New System.Drawing.Point(8, 15)
         Me.lblGAFile.Name = "lblGAFile"
@@ -55,42 +56,53 @@ Partial Class frmDaSFmgEdit
         '
         'btnSave
         '
-        Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnSave.Location = New System.Drawing.Point(621, 38)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 23)
         Me.btnSave.TabIndex = 34
-        Me.btnSave.Text = "Rebuild"
-        Me.btnSave.UseVisualStyleBackColor = True
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = true
         '
         'btnOpen
         '
-        Me.btnOpen.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnOpen.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnOpen.Location = New System.Drawing.Point(543, 38)
         Me.btnOpen.Name = "btnOpen"
         Me.btnOpen.Size = New System.Drawing.Size(75, 23)
         Me.btnOpen.TabIndex = 33
         Me.btnOpen.Text = "Open"
-        Me.btnOpen.UseVisualStyleBackColor = True
+        Me.btnOpen.UseVisualStyleBackColor = true
         '
         'dgvTextEntries
         '
-        Me.dgvTextEntries.AllowUserToAddRows = False
-        Me.dgvTextEntries.AllowUserToDeleteRows = False
-        Me.dgvTextEntries.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgvTextEntries.AllowUserToAddRows = false
+        Me.dgvTextEntries.AllowUserToDeleteRows = false
+        Me.dgvTextEntries.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.dgvTextEntries.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvTextEntries.Location = New System.Drawing.Point(11, 67)
         Me.dgvTextEntries.Name = "dgvTextEntries"
-        Me.dgvTextEntries.Size = New System.Drawing.Size(685, 316)
+        Me.dgvTextEntries.Size = New System.Drawing.Size(685, 525)
         Me.dgvTextEntries.TabIndex = 37
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = true
+        Me.Label1.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.Label1.Location = New System.Drawing.Point(459, 43)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(76, 13)
+        Me.Label1.TabIndex = 38
+        Me.Label1.Text = "2016-10-13-01"
         '
         'frmDaSFmgEdit
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(708, 395)
+        Me.ClientSize = New System.Drawing.Size(708, 604)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.dgvTextEntries)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnOpen)
@@ -98,15 +110,16 @@ Partial Class frmDaSFmgEdit
         Me.Controls.Add(Me.lblGAFile)
         Me.Name = "frmDaSFmgEdit"
         Me.Text = "Wulf's FMG Editor"
-        CType(Me.dgvTextEntries, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        CType(Me.dgvTextEntries,System.ComponentModel.ISupportInitialize).EndInit
+        Me.ResumeLayout(false)
+        Me.PerformLayout
 
-    End Sub
+End Sub
 
     Friend WithEvents txtFMGfile As TextBox
     Friend WithEvents lblGAFile As Label
     Friend WithEvents btnSave As Button
     Friend WithEvents btnOpen As Button
     Friend WithEvents dgvTextEntries As DataGridView
+    Friend WithEvents Label1 As Label
 End Class
