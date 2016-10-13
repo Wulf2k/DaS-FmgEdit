@@ -107,6 +107,10 @@ Public Class frmDaSFmgEdit
 
                     str = str.Replace("/n/", ChrW(10))
 
+                    If not str(str.Length-1) = ChrW(0) Then
+                        str = str & ChrW(0)
+                    End If
+
                     PutUniString(txtOffset, str)
                     txtOffset += str.Length * 2
                 End If
