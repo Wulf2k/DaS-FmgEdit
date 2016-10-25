@@ -276,4 +276,15 @@ Public Class frmDaSFmgEdit
         fs.Position = loc
         fs.Write(byt, 0, byt.Length)
     End Sub
+
+    Private Sub btnBrowse_Click(sender As Object, e As EventArgs) Handles btnBrowse.Click
+        Dim openDlg As New OpenFileDialog()
+
+        openDlg.Filter = "FMG File|*.FMG"
+        openDlg.Title = "Open your FMG file"
+
+        If openDlg.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+            txtFMGfile.Text = openDlg.FileName
+        End If
+    End Sub
 End Class
