@@ -6,9 +6,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{61132C1E-9622-49AA-98EB-B13BE90534CF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>DaS_FmgEdit.My.MyApplication</StartupObject>
-    <RootNamespace>DaS_FmgEdit</RootNamespace>
-    <AssemblyName>DaS-FmgEdit</AssemblyName>
+    <StartupObject>FmgEdit.My.MyApplication</StartupObject>
+    <RootNamespace>FmgEdit</RootNamespace>
+    <AssemblyName>FmgEdit</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -21,7 +21,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>DaS-FmgEdit.xml</DocumentationFile>
+    <DocumentationFile>FmgEdit.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <RemoveIntegerChecks>true</RemoveIntegerChecks>
   </PropertyGroup>
@@ -32,7 +32,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>DaS-FmgEdit.xml</DocumentationFile>
+    <DocumentationFile>FmgEdit.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -52,6 +52,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -73,11 +74,11 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.vb">
+    <Compile Include="frmFmgEdit.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="frmFmgEdit.Designer.vb">
+      <DependentUpon>frmFmgEdit.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -95,16 +96,25 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="UpdateWindow.designer.vb">
+      <DependentUpon>UpdateWindow.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateWindow.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <EmbeddedResource Include="frmFmgEdit.resx">
+      <DependentUpon>frmFmgEdit.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateWindow.resx">
+      <DependentUpon>UpdateWindow.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
