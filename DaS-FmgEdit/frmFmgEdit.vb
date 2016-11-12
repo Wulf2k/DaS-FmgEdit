@@ -10,7 +10,7 @@ Public Class FmgEdit
     Shared VersionCheckUrl As String = "http://wulf2k.ca/souls/FmgEdit-ver.txt"
 
 
-    Private async Sub updatecheck()
+    Private Async Sub updatecheck()
         Try
             Dim client As New Net.WebClient()
             Dim content As String = Await client.DownloadStringTaskAsync(VersionCheckUrl)
