@@ -91,7 +91,7 @@ Public Class FmgEdit
             Dim startOffset As Integer = 0
             Dim txtOffset As Integer = 0
 
-            Dim prevID As Integer = -1
+            Dim prevID As Integer = -2
             Dim numChunks As Integer = 0
 
             For i = 0 To dgvTextEntries.Rows.Count - 1
