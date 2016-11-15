@@ -98,7 +98,7 @@ Partial Class FmgEdit
         Me.lblVer.Name = "lblVer"
         Me.lblVer.Size = New System.Drawing.Size(76, 13)
         Me.lblVer.TabIndex = 38
-        Me.lblVer.Text = "2016.10.25.22"
+        Me.lblVer.Text = "2016.11.14.20"
         '
         'btnBrowse
         '
