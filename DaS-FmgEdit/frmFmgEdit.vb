@@ -71,6 +71,7 @@ Public Class FmgEdit
                 txt = ""
                 If txtOffset > 0 Then
                     txt = GetUniString(txtOffset)
+                    txt = txt.Replace(Chr(0),"")
                 End If
                 
                 dgvTextEntries.Rows.Add({j + startID, txt})
@@ -355,5 +356,30 @@ Public Class FmgEdit
             Process.Start(updateWindow.NewAssembly, """--old-file=" & updateWindow.OldAssembly & """")
             Me.Close()
         End If
+    End Sub
+
+    Private Sub btnExportCSV_Click(sender As Object, e As EventArgs) Handles btnExportCSV.Click
+        Dim entries as new List(Of String)
+
+        For each row as DataGridViewrow In dgvTextEntries.Rows
+            entries.Add((row.cells("ID").FormattedValue & "|" & row.Cells("Text").FormattedValue))
+        Next
+
+        File.WriteAllLines(txtFMGfile.Text & ".csv", entries)
+        MsgBox("Successfully exported to " & txtFMGfile.Text & ".csv")
+    End Sub
+
+    Private Sub btnImportCSV_Click(sender As Object, e As EventArgs) Handles btnImportCSV.Click
+        If File.Exists(txtFMGfile.Text & ".csv") Then
+            dgvTextEntries.Rows.Clear
+
+            Dim entries = File.ReadAllLines(txtFMGfile.Text & ".csv")
+            For each entry In entries
+                dgvTextEntries.Rows.Add({entry.Split("|")(0), entry.Split("|")(1)})    
+            Next
+        Else
+            MsgBox(txtFMGfile.Text & ".csv not found.")
+        End If
+        
     End Sub
 End Class

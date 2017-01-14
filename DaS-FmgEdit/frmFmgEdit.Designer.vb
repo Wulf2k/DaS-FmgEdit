@@ -30,6 +30,8 @@ Partial Class FmgEdit
         Me.lblVer = New System.Windows.Forms.Label()
         Me.btnBrowse = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btnExportCSV = New System.Windows.Forms.Button()
+        Me.btnImportCSV = New System.Windows.Forms.Button()
         CType(Me.dgvTextEntries,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
@@ -98,7 +100,7 @@ Partial Class FmgEdit
         Me.lblVer.Name = "lblVer"
         Me.lblVer.Size = New System.Drawing.Size(76, 13)
         Me.lblVer.TabIndex = 38
-        Me.lblVer.Text = "2016.11.14.20"
+        Me.lblVer.Text = "2017.01.14.03"
         '
         'btnBrowse
         '
@@ -120,11 +122,33 @@ Partial Class FmgEdit
         Me.btnUpdate.UseVisualStyleBackColor = true
         Me.btnUpdate.Visible = false
         '
+        'btnExportCSV
+        '
+        Me.btnExportCSV.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnExportCSV.Location = New System.Drawing.Point(342, 38)
+        Me.btnExportCSV.Name = "btnExportCSV"
+        Me.btnExportCSV.Size = New System.Drawing.Size(75, 23)
+        Me.btnExportCSV.TabIndex = 78
+        Me.btnExportCSV.Text = "Export CSV"
+        Me.btnExportCSV.UseVisualStyleBackColor = true
+        '
+        'btnImportCSV
+        '
+        Me.btnImportCSV.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnImportCSV.Location = New System.Drawing.Point(264, 38)
+        Me.btnImportCSV.Name = "btnImportCSV"
+        Me.btnImportCSV.Size = New System.Drawing.Size(75, 23)
+        Me.btnImportCSV.TabIndex = 77
+        Me.btnImportCSV.Text = "Import CSV"
+        Me.btnImportCSV.UseVisualStyleBackColor = true
+        '
         'FmgEdit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(708, 604)
+        Me.Controls.Add(Me.btnExportCSV)
+        Me.Controls.Add(Me.btnImportCSV)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnBrowse)
         Me.Controls.Add(Me.lblVer)
@@ -149,4 +173,6 @@ End Sub
     Friend WithEvents lblVer As Label
     Friend WithEvents btnBrowse As Button
     Friend WithEvents btnUpdate As Button
+    Friend WithEvents btnExportCSV As Button
+    Friend WithEvents btnImportCSV As Button
 End Class
