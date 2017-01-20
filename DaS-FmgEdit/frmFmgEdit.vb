@@ -44,14 +44,14 @@ Public Class FmgEdit
 
         fs = File.Open(txtFMGfile.Text, FileMode.Open)
 
-        bigendian = (GetInt8(9) = -1)
+        bigendian = (RInt8(9) = -1)
 
         Dim numEntries As Integer
         Dim startOffset As Integer
 
 
-        numEntries = GetInt32(&HC)
-        startOffset = GetInt32(&H14)
+        numEntries = RInt32(&HC)
+        startOffset = RInt32(&H14)
 
 
         For i = 0 To numEntries - 1
@@ -61,19 +61,19 @@ Public Class FmgEdit
             Dim txtOffset As Integer
             Dim txt As String
 
-            startIndex = GetInt32(&H1C + i * &HC)
-            startID = GetInt32(&H1C + i * &HC + 4)
-            endID = GetInt32(&H1C + i * &HC + 8)
+            startIndex = RInt32(&H1C + i * &HC)
+            startID = RInt32(&H1C + i * &HC + 4)
+            endID = RInt32(&H1C + i * &HC + 8)
 
             For j = 0 To (endID - startID)
-                txtOffset = GetInt32(startOffset + ((startIndex + j) * 4))
+                txtOffset = RInt32(startOffset + ((startIndex + j) * 4))
 
                 txt = ""
                 If txtOffset > 0 Then
-                    txt = GetUniString(txtOffset)
-                    txt = txt.Replace(Chr(0),"")
+                    txt = RUniString(txtOffset)
+                    txt = txt.Replace(Chr(10), "/n/")
                 End If
-                
+
                 dgvTextEntries.Rows.Add({j + startID, txt})
             Next
         Next
@@ -106,7 +106,7 @@ Public Class FmgEdit
 
 
             startOffset = &H1C + &HC * numChunks
-            txtOffset = startOffset + numentries * 4
+            txtOffset = startOffset + numEntries * 4
 
             Dim FirstID As Integer = dgvTextEntries.Rows(0).Cells("ID").FormattedValue
             Dim LastID As Integer = FirstID
@@ -117,10 +117,10 @@ Public Class FmgEdit
             numChunks = 0
             For i = 0 To dgvTextEntries.Rows.Count - 1
                 If dgvTextEntries.Rows(i).Cells("ID").FormattedValue > (LastID + 1) Then
-                    PutInt32(&H1C + numChunks * &HC, startEntry)
-                    PutInt32(&H1C + numChunks * &HC + 4, FirstID)
-                    PutInt32(&H1C + numChunks * &HC + 8, LastID)
-                
+                    WInt32(&H1C + numChunks * &HC, startEntry)
+                    WInt32(&H1C + numChunks * &HC + 4, FirstID)
+                    WInt32(&H1C + numChunks * &HC + 8, LastID)
+
                     FirstID = dgvTextEntries.Rows(i).Cells("ID").FormattedValue
                     startEntry = numEntries
                     numChunks += 1
@@ -129,38 +129,38 @@ Public Class FmgEdit
                 str = dgvTextEntries.Rows(i).Cells("Text").FormattedValue
 
                 If Not str = "" Then
-                    PutInt32(startOffset + numEntries * 4, txtOffset)
+                    WInt32(startOffset + numEntries * 4, txtOffset)
 
                     str = str.Replace("/n/", ChrW(10))
 
-                    If not str(str.Length-1) = ChrW(0) Then
+                    If Not str(str.Length - 1) = ChrW(0) Then
                         str = str & ChrW(0)
                     End If
 
-                    PutUniString(txtOffset, str)
+                    WUniString(txtOffset, str)
                     txtOffset += str.Length * 2
                 End If
-            
+
 
                 numEntries += 1
                 LastID = dgvTextEntries.Rows(i).Cells("ID").FormattedValue
             Next
 
-            if fs.Length Mod 4 = 2 Then PutInt16(txtOffset, 0)
+            If fs.Length Mod 4 = 2 Then WInt16(txtOffset, 0)
 
-            PutInt32(&H1C + numChunks * &HC, startEntry)
-            PutInt32(&H1C + numChunks * &HC + 4, FirstID)
-            PutInt32(&H1C + numChunks * &HC + 8, LastID)
+            WInt32(&H1C + numChunks * &HC, startEntry)
+            WInt32(&H1C + numChunks * &HC + 4, FirstID)
+            WInt32(&H1C + numChunks * &HC + 8, LastID)
 
-            PutInt32(0, &H10000)
-            PutInt8(&H8, 1)
-            If bigendian Then PutInt8(&H9, -1)
-            PutInt32(&H4, fs.Length)
-            PutInt32(&HC, numChunks + 1)
-            PutInt32(&H10, numEntries)
-            PutInt32(&H14, startOffset)
-        
-            fs.Close
+            WInt32(0, &H10000)
+            WInt8(&H8, 1)
+            If bigendian Then WInt8(&H9, -1)
+            WInt32(&H4, fs.Length)
+            WInt32(&HC, numChunks + 1)
+            WInt32(&H10, numEntries)
+            WInt32(&H14, startOffset)
+
+            fs.Close()
 
             MsgBox("File saved.")
 
@@ -185,19 +185,19 @@ Public Class FmgEdit
 
 
 
-    Private Function GetInt8(Byval loc As Integer) As SByte
-        Dim tmpSByt As SByte
+    Private Function RInt8(ByVal loc As Integer) As SByte
+        Dim tmpInt8 As SByte
         Dim byt(0) As Byte
 
         fs.Position = loc
         fs.Read(byt, 0, 1)
 
-        tmpSByt = CSByte(byt(0))
+        tmpInt8 = CSByte(byt(0))
 
-        Return tmpSByt
+        Return tmpInt8
     End Function
-    Private Function GetInt32(ByVal loc As Integer) As Integer
-        Dim tmpInt As Integer = 0
+    Private Function RInt32(ByVal loc As Integer) As Int32
+        Dim tmpInt32 As Integer = 0
         Dim byt = New Byte() {0, 0, 0, 0}
 
         fs.Position = loc
@@ -207,12 +207,12 @@ Public Class FmgEdit
             Array.Reverse(byt)
         End If
 
-        tmpInt = BitConverter.ToInt32(byt, 0)
+        tmpInt32 = BitConverter.ToInt32(byt, 0)
 
-        Return tmpInt
+        Return tmpInt32
     End Function
-    Private Function GetUInt32(ByVal loc As Integer) As UInteger
-        Dim tmpUInt As UInteger = 0
+    Private Function RUInt32(ByVal loc As Integer) As UInt32
+        Dim tmpUInt32 As UInt32 = 0
         Dim byt = New Byte() {0, 0, 0, 0}
 
         fs.Position = loc
@@ -222,17 +222,17 @@ Public Class FmgEdit
             Array.Reverse(byt)
         End If
 
-        tmpUInt = BitConverter.ToUInt32(byt, 0)
+        tmpUInt32 = BitConverter.ToUInt32(byt, 0)
 
-        Return tmpUInt
+        Return tmpUInt32
     End Function
-    Private Function GetUniString(ByVal loc As Integer) As String
+    Private Function RUniString(ByVal loc As Integer) As String
         fs.Position = loc
 
         Dim tmpStr As String = ""
         Dim endstr As Boolean = False
         Dim byt(1) As Byte
-        Dim chr As Char
+        Dim chara As Char
 
         While Not endstr
             fs.Read(byt, 0, 2)
@@ -241,52 +241,56 @@ Public Class FmgEdit
                 Array.Reverse(byt)
             End If
 
-            chr = ChrW(byt(1) * 256 + byt(0))
-            If chr = ChrW(0) Then endstr = True
+            chara = System.Text.Encoding.Unicode.GetString(byt)(0)
+            If chara = Chr(0) Then
+                endstr = True
 
-            If chr = ChrW(10) Then
-                tmpStr = tmpStr & "/n/"
             Else
-                tmpStr = tmpStr & chr
+                tmpStr = tmpStr & chara
             End If
+
 
         End While
 
         Return tmpStr
     End Function
 
-    Private sub PutInt8(ByVal loc As Integer, ByVal val As SByte) 
+    Private Sub WInt8(ByVal loc As Integer, ByVal val As SByte)
         fs.Position = loc
-        fs.write({CByte(val)}, 0, 1)
-    End sub
-    Private sub PutInt16(ByVal loc As Integer, byval val As Int16)
+        fs.Write({CByte(val)}, 0, 1)
+    End Sub
+    Private Sub WInt16(ByVal loc As Integer, ByVal val As Int16)
         fs.Position = loc
-        Dim byt(1) as Byte
+        Dim byt(1) As Byte
         byt = BitConverter.GetBytes(val)
 
-        If bigendian Then Array.Reverse(byt)
+        If bigendian Then
+            Array.Reverse(byt)
+        End If
 
         fs.Write(byt, 0, 2)
-    End sub
-    Private Sub PutInt32(ByVal loc As integer, ByVal val As Integer)
+    End Sub
+    Private Sub WInt32(ByVal loc As Integer, ByVal val As Int32)
         fs.Position = loc
-        Dim byt(3) as Byte
+        Dim byt(3) As Byte
 
         byt = BitConverter.GetBytes(val)
 
-        If bigendian Then Array.Reverse(byt)
+        If bigendian Then
+            Array.Reverse(byt)
+        End If
 
         fs.Write(byt, 0, 4)
     End Sub
-    Private sub PutUniString(ByVal loc As Integer, Byref str As String)
+    Private Sub WUniString(ByVal loc As Integer, ByRef str As String)
         fs.Position = loc
 
-        Dim byt(1) as Byte
-        Dim chr As Char
+        Dim byt(1) As Byte
+        Dim chara As Char
 
         For i = 0 To str.Length - 1
-            chr = str(i)
-            byt = BitConverter.GetBytes(chr)
+            chara = str(i)
+            byt = BitConverter.GetBytes(chara)
 
             If bigendian Then
                 Array.Reverse(byt)
@@ -294,11 +298,9 @@ Public Class FmgEdit
 
             fs.Write(byt, 0, 2)
         Next
+    End Sub
 
-        'fs.Write({0,0},0,2)
-    End sub
-
-    Private Sub WriteBytesToStream(ByVal loc As Integer, ByVal byt() As Byte)
+    Private Sub WBytes(ByVal loc As Integer, ByVal byt() As Byte)
         fs.Position = loc
         fs.Write(byt, 0, byt.Length)
     End Sub
